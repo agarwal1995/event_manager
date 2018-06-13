@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const passport = require("passport");
+
 //const MongoClient = require("mongodb").MongoClient;
 const users = require("./routes/api/users");
 const events = require("./routes/api/events");
@@ -37,7 +39,8 @@ MongoClient.connect(db)
 var MongoClient = require("mongodb").MongoClient;
 const db = require("./config/keys").mongoURI;
 var uri =
-  "mongodb+srv://raag:pass@cluster0-cpdh3.mongodb.net/test?retryWrites=true";
+  "mongodb://raag:raag@cluster0-shard-00-00-cpdh3.mongodb.net:27017,cluster0-shard-00-01-cpdh3.mongodb.net:27017,cluster0-shard-00-02-cpdh3.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true";
+//"mongodb+srv://raag:raag@cluster0-cpdh3.mongodb.net/test?retryWrites=true";
 MongoClient.connect(db)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
@@ -60,6 +63,12 @@ mongoose
   .catch(err => console.log(err));
 */
 app.get("/", (req, res) => res.send("Hello hgf"));
+
+//Passport Middleware
+app.use(passport.initialize());
+
+//Passport Config
+require("./config/passport")(passport);
 
 app.use("/api/users", users);
 app.use("/api/events", events);

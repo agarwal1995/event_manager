@@ -2,26 +2,29 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/test");
 const Schema = mongoose.Schema;
 
-//const users = mongoose.model;
-
 //Create Schema
-const UserSchema = new Schema({
-  name: {
+
+const EventSchema = new Schema({
+  id: {
     type: String,
     required: true
   },
-  email: {
+  eventname: {
     type: String,
     required: true
   },
-  password: {
+  location: {
     type: String,
     required: true
   },
   date: {
     type: Date,
-    default: Date.now
+    require: true
+  },
+  description: {
+    type: String,
+    required: true
   }
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = Event = mongoose.model("events", EventSchema);
