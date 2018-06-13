@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
+      name: "",
       email: "",
       password: "",
+      password2: "",
       errors: {}
     };
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -16,29 +17,38 @@ class Login extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
   onSubmit(e) {
     e.preventDefault();
 
-    const user = {
+    const newUser = {
+      name: this.state.name,
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      password2: this.state.password2
     };
 
-    console.log(user);
+    console.log(newUser);
   }
-
   render() {
     return (
-      <div className="login">
+      <div className="register">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">
-                Sign in to your Concerts account
-              </p>
+              <h1 className="display-4 text-center">Sign Up</h1>
+              <p className="lead text-center">Create your Concerts account</p>
               <form onSubmit={this.onSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Name"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                    required
+                  />
+                </div>
                 <div className="form-group">
                   <input
                     type="email"
@@ -61,6 +71,17 @@ class Login extends Component {
                     required
                   />
                 </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control form-control-lg"
+                    placeholder="Confirm Password"
+                    name="password2"
+                    value={this.state.password2}
+                    onChange={this.onChange}
+                    required
+                  />
+                </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
@@ -71,4 +92,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;
