@@ -15,6 +15,13 @@ class Dashboard extends Component {
               </p>
               <div>
                 <Link
+                  to="/read"
+                  className="btn btn-lg btn- btn-block btn-outline-primary"
+                >
+                  Read Event
+                </Link>
+
+                <Link
                   to="/create"
                   className="btn btn-lg btn- btn-block btn-outline-primary"
                 >
