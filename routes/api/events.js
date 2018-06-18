@@ -65,6 +65,18 @@ router.get("/:id", (req, res) => {
     .catch(err => res.status(404).json({ noeventfound: " Event Not Found" }));
 });
 
+router.post("/singleread", (req, res) => {
+  Event.findOne({ id: req.body.id })
+    .then(event => {
+      if (!event) {
+        return res.status(404).json({ id: " Event Id Does not Exist" });
+      } else {
+        res.json(event);
+      }
+    })
+    .catch(err => res.status(404).json({ noeventfound: " Event Not Found" }));
+});
+
 router.delete("/:id", (req, res) => {
   Event.findById(req.params.id)
     .then(event => {

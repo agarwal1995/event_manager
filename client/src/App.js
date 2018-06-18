@@ -14,6 +14,9 @@ import Landing from "./component/layout/Landing";
 import Login from "./component/auth/Login";
 import Register from "./component/auth/Register";
 import "./App.css";
+import Dashboard from "./component/dashboard/Dashboard";
+import Create from "./component/dashboard/Create";
+import Update from "./component/dashboard/Update";
 
 //Check For Token
 if (localStorage.jwtToken) {
@@ -46,6 +49,10 @@ class App extends Component {
             <div className="container">
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/create" component={Create} />
+              <Route exact path="/update" component={Update} />
             </div>
             <Footer />
           </div>
