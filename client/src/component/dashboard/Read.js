@@ -19,13 +19,13 @@ class Read extends Component {
 
   render() {
     return (
-      <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Event CATALOG</h3>
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-heading">
+            <h3 className="panel-title">Event CATALOG</h3>
           </div>
-          <div class="panel-body">
-            <table class="table table-stripe">
+          <div className="panel-body">
+            <table className="table table-stripe">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -39,7 +39,7 @@ class Read extends Component {
                 {this.state.Event.map(Event => (
                   <tr>
                     <td>
-                      <Link to={`/${Event._id}`}>{Event.id}</Link>
+                      <Link to={`/single/${Event._id}`}>{Event.id}</Link>
                     </td>
                     <td>{Event.eventname}</td>
                     <td>{Event.location}</td>

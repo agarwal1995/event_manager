@@ -18,6 +18,7 @@ import Dashboard from "./component/dashboard/Dashboard";
 import Create from "./component/dashboard/Create";
 import Update from "./component/dashboard/Update";
 import Read from "./component/dashboard/Read";
+import Single from "./component/dashboard/Single";
 
 //Check For Token
 if (localStorage.jwtToken) {
@@ -55,6 +56,7 @@ class App extends Component {
               <Route exact path="/create" component={Create} />
               <Route exact path="/update" component={Update} />
               <Route exact path="/read" component={Read} />
+              <Route exact path="/single/:id" component={Single} />
             </div>
             <Footer />
           </div>
