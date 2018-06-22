@@ -130,10 +130,10 @@ class Create extends Component {
 
 Create.propTypes = {
   createEvent: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  event: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  auth: state.auth
+  event: state.event
 });
 
 export default connect(

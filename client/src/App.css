@@ -43,3 +43,7 @@ dd {
   margin: 0;
   display: block;
 }
+
+.lbtn {
+  width: 64px;
+}

@@ -19,7 +19,7 @@ class Single extends Component {
   delete(id) {
     console.log(id);
     axios.delete("/api/events/" + id).then(result => {
-      this.props.history.push("/read");
+      this.props.history.push("/dashboard");
     });
   }
 

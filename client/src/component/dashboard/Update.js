@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { updateEvent } from "../../actions/eventActions";
+import axios from "axios";
+
 class Update extends Component {
   constructor(props) {
     super(props);
@@ -12,12 +18,38 @@ class Update extends Component {
       description: ""
     };
     this.onChange = this.onChange.bind(this);
-    //this.onSubmit = this.onSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     //this.onClick = this.onClick.bind(this);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  /*onClick(e) {
+    axios.post("../api/events/singleread", this.id).then(res => {
+      this.setState({ Event: res.data });
+      console.log(this.state.Event);
+    });
+
+    //this.setState({ Event });
+  }
+  */
+  onSubmit(e) {
+    e.preventDefault();
+
+    const newEvent = {
+      id: this.state.id,
+      eventname: this.state.eventname,
+      location: this.state.location,
+      date: this.state.date,
+      description: this.state.description
+    };
+
+    this.props.updateEvent(newEvent, this.props.history);
+
+    console.log(newEvent);
   }
 
   render() {
@@ -34,7 +66,7 @@ class Update extends Component {
                 Let's update Information for the Event
               </p>
 
-              <form action={this.onSubmit}>
+              <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -46,21 +78,13 @@ class Update extends Component {
                     required
                   />
                 </div>
-                <div>
-                  <button
-                    //onClick={this.delete.bind(null)}
-                    className="btn btn-info btn-block mt-4"
-                  >
-                    Search
-                  </button>
-                </div>
-                <hr />
+
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control form-control-lg"
                     placeholder="Name of The Event"
-                    name="name"
+                    name="eventname"
                     value={this.state.eventname}
                     onChange={this.onChange}
                     required
@@ -79,7 +103,7 @@ class Update extends Component {
                 </div>
                 <div className="form-group">
                   <input
-                    type="text"
+                    type="date"
                     className="form-control form-control-lg"
                     placeholder="Date"
                     name="date"
@@ -110,4 +134,26 @@ class Update extends Component {
   }
 }
 
-export default Update;
+//export default Update;
+Update.propTypes = {
+  updateEvent: PropTypes.func.isRequired,
+  event: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  event: state.event
+});
+
+export default connect(
+  mapStateToProps,
+  { updateEvent }
+)(withRouter(Update));
+
+/*
+<div>
+                  <button
+                    onClick={this.state.bind(null)}
+                    className="btn btn-info btn-block mt-4"
+                  >
+                    Search
+                  </button>
+                </div>*/
