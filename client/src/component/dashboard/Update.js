@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import classnames from "classnames";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
@@ -15,12 +16,19 @@ class Update extends Component {
       eventname: "",
       location: "",
       date: "",
-      description: ""
+      description: "",
+      errors: {}
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     //this.onClick = this.onClick.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange(e) {
@@ -53,6 +61,8 @@ class Update extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div className="update">
         <div className="container">
@@ -70,58 +80,78 @@ class Update extends Component {
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.id
+                    })}
                     placeholder="Event ID"
                     name="id"
                     value={this.state.id}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.id && (
+                    <div className="invalid-feedback">{errors.id}</div>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.eventname
+                    })}
                     placeholder="Name of The Event"
                     name="eventname"
                     value={this.state.eventname}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.eventname && (
+                    <div className="invalid-feedback">{errors.eventname}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="text"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.location
+                    })}
                     placeholder="Location"
                     name="location"
                     value={this.state.location}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.location && (
+                    <div className="invalid-feedback">{errors.location}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <input
                     type="date"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.date
+                    })}
                     placeholder="Date"
                     name="date"
                     value={this.state.date}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.date && (
+                    <div className="invalid-feedback">{errors.date}</div>
+                  )}
                 </div>
 
                 <div className="form-group">
                   <textarea
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.description
+                    })}
                     placeholder="Description for The Event"
                     name="description"
                     value={this.state.description}
                     onChange={this.onChange}
-                    required
                   />
+                  {errors.description && (
+                    <div className="invalid-feedback">{errors.description}</div>
+                  )}
                 </div>
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />
@@ -137,10 +167,12 @@ class Update extends Component {
 //export default Update;
 Update.propTypes = {
   updateEvent: PropTypes.func.isRequired,
-  event: PropTypes.object.isRequired
+  event: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
-  event: state.event
+  event: state.event,
+  errors: state.errors
 });
 
 export default connect(

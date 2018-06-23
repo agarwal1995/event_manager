@@ -14,9 +14,9 @@ export const createEvent = (eventData, history) => dispatch => {
       err =>
         dispatch({
           type: GET_ERRORS,
-          payload: err
-        }),
-      history.push("/create")
+          payload: err.response.data
+        })
+      // history.push("/create")
     );
 };
 /**/
@@ -29,9 +29,9 @@ export const updateEvent = (eventData, history) => dispatch => {
       err =>
         dispatch({
           type: GET_ERRORS,
-          payload: err
-        }),
-      history.push("/update")
+          payload: err.response.data
+        })
+      //history.push("/update")
     );
 };
 

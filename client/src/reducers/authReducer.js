@@ -17,11 +17,11 @@ export default function(state = initialState, action) {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
-    case GET_ERRORS:
-      return {
-        ...state,
-        user: action.payload
-      };
+    //case GET_ERRORS:
+    //return {
+    //...state,
+    //user: action.payload
+    // };
     default:
       return state;
   }

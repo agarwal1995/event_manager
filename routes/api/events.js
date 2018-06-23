@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const validateCreateInput = require("../../validation/create");
+const validateUpdateInput = require("../../validation/update");
 router.get("/test", (req, res) => res.json({ msg: "events works" }));
 
 //Load Events Module
@@ -11,6 +13,13 @@ const Event = require("../../models/Event");
 // @access  Public
 
 router.post("/create", (req, res) => {
+  const { isValid, errors } = validateCreateInput(req.body);
+
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Event.findOne({ id: req.body.id }).then(event => {
     if (event) {
       return res.status(400).json({ id: "Event Id Already Exists" });
@@ -32,6 +41,13 @@ router.post("/create", (req, res) => {
 });
 
 router.post("/update", (req, res) => {
+  const { isValid, errors } = validateUpdateInput(req.body);
+
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   Event.findOne({ id: req.body.id }).then(event => {
     if (!event) {
       return res.status(404).json({ id: " Event Id Does not Exist" });

@@ -24,11 +24,11 @@ export default function(state = initialState, action) {
     case GET_EVENT:
       // console.log(action);
       return [action.payload.data, ...state];
-    case GET_ERRORS:
-      return {
-        ...state,
-        event: [action]
-      };
+    //case GET_ERRORS:
+    //  return {
+    //    ...state,
+    //    event: [action]
+    //  };
     default:
       return {
         ...state,
